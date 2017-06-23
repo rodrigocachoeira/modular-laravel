@@ -1,0 +1,14 @@
+{
+  "preLoader": {
+    "coreController": {
+      "namespace": "App\\Core\\Http\\Controllers\\Controller",
+      "name":      "Controller",
+    }
+  },
+  "paths": {
+    "controller":     "Modules\\{bundle}\\Http\\Controllers",
+    "model":          "",
+    "request":        "",
+    "view":           ""
+  }
+}

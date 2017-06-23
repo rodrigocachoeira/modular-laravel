@@ -1,0 +1,15 @@
+<?php
+
+namespace {namespace};
+
+use {coreController};
+
+class {controller} extends Controller
+{
+
+  public function index ()
+  {
+    dd('Render index of admin module');
+  }
+
+}
