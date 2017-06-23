@@ -8,6 +8,21 @@ class Convert
 {
 
     /**
+    * Variável temporável de armazenamento
+    *
+    * @var String
+    */
+    private $tempContent;
+
+    /**
+    * flag responsável por manter cache
+    * para o documento temporário
+    *
+    * @var boolean
+    */
+    private $cache;
+
+    /**
      * Create a new command instance.
      *
      * @return void
@@ -29,5 +44,58 @@ class Convert
     public function namespaceToPath ($namespace, $bundle, $entity, $preLoader)
     {
       return str_replace('\\', '/', str_replace('{bundle}', $bundle, $namespace)).'/'. Inflector::pluralize($entity).'Controller.php';
+    }
+
+    /**
+    * Limpa qualquer cache armazenado pela
+    * classe
+    */
+    public function clearCache ()
+    {
+      $this->tempContent = '';
+    }
+
+    /**
+    * Define se a classe irá armazenar
+    * cache
+    *
+    * @param boolean $storage
+    *
+    * @return Convert
+    */
+    public function setCache ($cache)
+    {
+      $this->cache = $cache;
+      return $this;
+    }
+
+    /**
+    * Troca uma palavra chave do documento
+    * de configuracao pelo valor real
+    *
+    * @param String $target
+    * @param String $to
+    *
+    * @return String
+    */
+    public function change ($target, $to, $content)
+    {
+      $content = str_replace('{'.$target.'}', $to, $content);
+      if ($this->cache) {
+        $this->tempContent = $content;
+      }
+    }
+
+    /**
+    * Retorna o cache da classe
+    *
+    * @return Object
+    */
+    public function getCache ()
+    {
+      $class = new \StdClass();
+      $class->tempContent = $this->tempContent;
+
+      return $class;
     }
 }

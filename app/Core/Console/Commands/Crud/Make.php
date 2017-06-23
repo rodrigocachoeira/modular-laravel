@@ -4,6 +4,7 @@ namespace App\Core\Console\Commands\Crud;
 
 use Illuminate\Console\Command;
 use App\Core\Console\Commands\Crud\Usefuls\Convert;
+use App\Core\Console\Commands\Crud\Templates\Template;
 
 class Make extends Command
 {
@@ -50,6 +51,21 @@ class Make extends Command
     private $preLoader;
 
     /**
+    * Objeto responsável por carregar
+    * as informacoes de configuracao
+    *
+    * @var Loader
+    */
+    protected $loader;
+
+    /**
+    * Gerenciador de templates
+    *
+    * @var Template
+    */
+    protected $template;
+
+    /**
      * Create a new command instance.
      *
      * @return void
@@ -59,6 +75,8 @@ class Make extends Command
         parent::__construct();
 
         $this->convert = new Convert();
+        $this->loader = new Loader();
+        $this->template = new Template();
     }
 
     /**
@@ -71,24 +89,17 @@ class Make extends Command
       $this->bundle = ucfirst($this->argument('bundle'));
       $this->entity = ucfirst($this->argument('entity'));
 
-      $config = $this->collectConfigInfo();
-      $this->preLoader = $config->preLoader;
+      if (!$this->loader->onLoad()) {
+        return;
+      }
+      $this->preLoader = $this->loader->paths->preLoader;
 
-      foreach ($config->paths as $key => $value) {
+      foreach ($this->loader->paths->paths as $key => $value) {
         $this->makeFile($key, $value);
       }
     }
 
-    /**
-    * Retorna os endereçoes de configuração
-    * dos arquivos que serão criados
-    *
-    * @return Array
-    */
-    private function collectConfigInfo ()
-    {
-      return json_decode(file_get_contents(app_path('Core/Console/Commands/Crud/Config/paths.json')));
-    }
+
 
     /**
     * Realiza a criação do arquivo do crud
@@ -134,5 +145,6 @@ class Make extends Command
     private function makeController ($name)
     {
       touch(app_path($this->convert->namespaceToPath($name, $this->bundle, $this->entity, $this->preLoader))); //cria o controller
+      $this->template->getController()->mount();
     }
 }

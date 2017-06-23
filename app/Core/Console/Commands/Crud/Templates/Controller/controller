@@ -2,9 +2,9 @@
 
 namespace {namespace};
 
-use {coreController};
+use {coreController.namespace};
 
-class {controller} extends Controller
+class {controller} extends {coreController.name}
 {
 
   public function index ()
