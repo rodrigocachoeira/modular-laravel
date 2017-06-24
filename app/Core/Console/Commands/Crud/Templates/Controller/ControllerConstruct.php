@@ -3,6 +3,7 @@
 namespace App\Core\Console\Commands\Crud\Templates\Controller;
 
 use App\Core\Console\Commands\Crud\Usefuls\Convert;
+use App\Core\Console\Commands\Crud\Usefuls\Inflector;
 
 class ControllerConstruct
 {
@@ -30,12 +31,16 @@ class ControllerConstruct
   * para o template final utilizando os devidos
   * valores
   *
+  * @param String $bundle
+  * @param String $entity
+  * @param Loader loader
+  *
   * @return boolean
   */
-  public function mount ()
+  public function mount ($bundle, $entity, $loader)
   {
     $this->content = $this->loadConfigFile();
-    $this->applyValues();
+    $this->applyValues($bundle, $entity, $loader);
 
     dd($this->content);
   }
@@ -44,11 +49,20 @@ class ControllerConstruct
   * Aplica os valores corretos no documento
   * de configuracao dos controladores
   *
+  * @param String $bundle
+  * @param String $entity
+  * @param Loader loader
+  *
   * @return void
   */
-  private function applyValues ()
+  private function applyValues ($bundle, $entity, $loader)
   {
-    $this->convert->change('namespace', 'Hello', $this->content);
+    $this->convert->change('controller.main.namespace', $loader->paths->http->main->namespace, $this->content);
+    $this->convert->change('controller.main.name', $loader->paths->http->main->name);
+    $this->convert->change('namespace', $this->convert->changeKeys($loader->paths->http->namespace, ['bundle' => $bundle]));
+    $this->convert->change('controller', Inflector::pluralize($entity).'Controller');
+    $this->convert->change('controller.repository', strtolower($entity).'Repository');
+    $this->convert->change('controller.caps.repository', $entity.'Repository');
 
     $this->content = $this->convert->getCache()->tempContent;
   }

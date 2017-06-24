@@ -47,6 +47,24 @@ class Convert
     }
 
     /**
+    * Troca as chaves encontradas por seus
+    * respectivos valores
+    *
+    * @param String $value
+    * @param Array $elements
+    *
+    * @return String
+    */
+    public function changeKeys ($value, $elements)
+    {
+      $newValue = $value;
+      foreach ($elements as $key => $element) {
+        $newValue = str_replace('{'.$key.'}', $element, $newValue);
+      }
+      return $newValue;
+    }
+
+    /**
     * Limpa qualquer cache armazenado pela
     * classe
     */
@@ -78,9 +96,9 @@ class Convert
     *
     * @return String
     */
-    public function change ($target, $to, $content)
+    public function change ($target, $to, $content = null)
     {
-      $content = str_replace('{'.$target.'}', $to, $content);
+      $content = str_replace('{'.$target.'}', $to, is_null($content) ? $this->tempContent : $content);
       if ($this->cache) {
         $this->tempContent = $content;
       }

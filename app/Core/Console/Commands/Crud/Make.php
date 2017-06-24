@@ -44,11 +44,11 @@ class Make extends Command
     private $entity;
 
     /**
-    * Preloader information vector
+    * Http information vector
     *
     * @var Array
     */
-    private $preLoader;
+    private $html;
 
     /**
     * Objeto responsável por carregar
@@ -92,7 +92,7 @@ class Make extends Command
       if (!$this->loader->onLoad()) {
         return;
       }
-      $this->preLoader = $this->loader->paths->preLoader;
+      $this->http = $this->loader->paths->http;
 
       foreach ($this->loader->paths->paths as $key => $value) {
         $this->makeFile($key, $value);
@@ -144,7 +144,7 @@ class Make extends Command
     */
     private function makeController ($name)
     {
-      touch(app_path($this->convert->namespaceToPath($name, $this->bundle, $this->entity, $this->preLoader))); //cria o controller
-      $this->template->getController()->mount();
+      touch(app_path($this->convert->namespaceToPath($name, $this->bundle, $this->entity, $this->http))); //cria o controller
+      $this->template->getController()->mount($this->bundle, $this->entity, $this->loader);
     }
 }
