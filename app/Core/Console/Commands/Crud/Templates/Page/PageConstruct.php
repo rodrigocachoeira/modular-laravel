@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Core\Console\Commands\Crud\Templates\Controller;
+namespace App\Core\Console\Commands\Crud\Templates\Page;
 
 use App\Core\Console\Commands\Crud\Usefuls\Convert;
 use App\Core\Console\Commands\Crud\Usefuls\Inflector;
 
-class ControllerConstruct
+class PageConstruct
 {
 
   /**
@@ -52,13 +52,12 @@ class ControllerConstruct
     $this->content = $this->loadConfigFile();
     $this->applyValues($bundle, $entity, $loader);
 
-    //dd($this->content);
     return $this;
   }
 
   /**
   * Aplica os valores corretos no documento
-  * de configuracao dos controladores
+  * de configuracao das páginas
   *
   * @param String $bundle
   * @param String $entity
@@ -68,25 +67,21 @@ class ControllerConstruct
   */
   private function applyValues ($bundle, $entity, $loader)
   {
-    $this->convert->change('controller.main.namespace', $loader->paths->http->controller->main->namespace, $this->content);
-    $this->convert->change('controller.main.name', $loader->paths->http->controller->main->name);
-    $this->convert->change('namespace', $this->convert->changeKeys($loader->paths->http->controller->namespace, ['bundle' => $bundle]));
-    $this->convert->change('controller', Inflector::pluralize($entity).'Controller');
-    $this->convert->change('controller.repository', strtolower($entity).'Repository');
-    $this->convert->change('controller.caps.repository', $entity.'Repository');
+    $this->convert->change('namespace', $this->convert->changeKeys($loader->paths->http->page->namespace, ['bundle' => $bundle]), $this->content);
+    $this->convert->change('page.name', $entity.'Page');
 
     $this->content = $this->convert->getCache()->tempContent;
   }
 
   /**
   * Carrega o documento padrao de configuracao
-  * do controlador
+  * da pagina
   *
   * @return String
   */
   private function loadConfigFile ()
   {
-    return file_get_contents(app_path('Core/Console/Commands/Crud/Templates/Controller/controller'));
+    return file_get_contents(app_path('Core/Console/Commands/Crud/Templates/Page/page'));
   }
 
 }

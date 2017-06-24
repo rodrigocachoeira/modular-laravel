@@ -3,6 +3,7 @@
 namespace App\Core\Console\Commands\Crud\Templates;
 
 use App\Core\Console\Commands\Crud\Templates\Controller\ControllerConstruct;
+use App\Core\Console\Commands\Crud\Templates\Page\PageConstruct;
 
 class Template
 {
@@ -15,12 +16,20 @@ class Template
   private $controller;
 
   /**
+  * Gerencia o template de páginas
+  *
+  * @var PageConstruct
+  */
+  private $page;
+
+  /**
   * Método de construcao
   *
   */
   public function __construct ()
   {
     $this->controller = new ControllerConstruct();
+    $this->page = new PageConstruct();
   }
 
   public function getController ()
@@ -28,16 +37,9 @@ class Template
     return $this->controller;
   }
 
-  /**
-  * Manipula o arquivo padrao de configuracao
-  * para o template final utilizando os devidos
-  * valores
-  *
-  * @return boolean
-  */
-  public function mount ()
+  public function getPage ()
   {
-    $this->controller->mount();
+      return $this->page;
   }
 
 }

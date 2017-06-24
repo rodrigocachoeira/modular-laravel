@@ -1,9 +1,14 @@
 {
   "http": {
-    "namespace": "App\\Modules\\{bundle}\\Http\\Controllers",
-    "main": {
-      "namespace": "App\\Core\\Http\\Controllers\\Controller",
-      "name":      "Controller"
+    "page": {
+      "namespace": "App\\Modules\\{bundle}\\Http\\Pages"
+    },
+    "controller": {
+      "namespace": "App\\Modules\\{bundle}\\Http\\Controllers",
+      "main": {
+        "namespace": "App\\Core\\Http\\Controllers\\Controller",
+        "name":      "Controller"
+      }
     }
   },
   "paths": {

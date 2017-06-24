@@ -23,7 +23,6 @@ class Loader
   {
     $this->paths = $this->collectPathsJSON();
     if (is_null($this->paths)) {
-      $this->error('Invalid JSON file: paths.json');
       return false;
     }
     return true;

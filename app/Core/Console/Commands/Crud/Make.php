@@ -91,6 +91,7 @@ class Make extends Command
       $this->entity = ucfirst($this->argument('entity'));
 
       if (!$this->loader->onLoad()) {
+        $this->error('Invalid JSON file: paths.json');
         return;
       }
       $this->http = $this->loader->paths->http;
@@ -168,7 +169,7 @@ class Make extends Command
     {
       File::put(
         app_path($this->convert->namespaceToPath($name, $this->bundle, $this->entity, $this->http, false) . 'Page.php'),
-        'oi'
+        $this->template->getPage()->mount($this->bundle, $this->entity, $this->loader)->getContent()
       );
     }
 }
