@@ -8,14 +8,14 @@ class {controller} extends {controller.main.name}
 {
 
   /**
-  * @param ${controller.caps.repository} ${controller.repository}
+  * @param {controller.caps.repository} ${controller.repository}
   */
   protected {controller.repository};
 
   /**
   * Método Construtor
   *
-  * @param ${controller.caps.repository} ${controller.repository}
+  * @param {controller.caps.repository} ${controller.repository}
   */
   public function __construct ({controller.caps.repository} ${controller.repository})
   {

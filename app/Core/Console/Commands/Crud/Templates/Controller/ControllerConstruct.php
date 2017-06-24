@@ -27,6 +27,16 @@ class ControllerConstruct
   }
 
   /**
+  * Retorna o conteudo
+  *
+  * @return String
+  */
+  public function getContent ()
+  {
+    return $this->content;
+  }
+
+  /**
   * Manipula o arquivo padrao de configuracao
   * para o template final utilizando os devidos
   * valores
@@ -42,7 +52,8 @@ class ControllerConstruct
     $this->content = $this->loadConfigFile();
     $this->applyValues($bundle, $entity, $loader);
 
-    dd($this->content);
+    //dd($this->content);
+    return $this;
   }
 
   /**

@@ -5,6 +5,7 @@ namespace App\Core\Console\Commands\Crud;
 use Illuminate\Console\Command;
 use App\Core\Console\Commands\Crud\Usefuls\Convert;
 use App\Core\Console\Commands\Crud\Templates\Template;
+use Illuminate\Support\Facades\File;
 
 class Make extends Command
 {
@@ -117,6 +118,10 @@ class Make extends Command
           $this->makeController($value);
           break;
 
+        case 'page':
+          $this->makePage($value);
+          break;
+
         case 'model':
           # code...
           break;
@@ -144,7 +149,26 @@ class Make extends Command
     */
     private function makeController ($name)
     {
-      touch(app_path($this->convert->namespaceToPath($name, $this->bundle, $this->entity, $this->http))); //cria o controller
-      $this->template->getController()->mount($this->bundle, $this->entity, $this->loader);
+      File::put(
+          app_path($this->convert->namespaceToPath($name, $this->bundle, $this->entity, $this->http, true) . 'Controller.php'),
+          $this->template->getController()->mount($this->bundle, $this->entity, $this->loader)->getContent()
+      );
+    }
+
+    /**
+    * Realiza a criacao de um objeto
+    * que ira carregas suas devidas paginas
+    * HTML
+    *
+    * @param String $page
+    *
+    * @return void
+    */
+    private function makePage ($name)
+    {
+      File::put(
+        app_path($this->convert->namespaceToPath($name, $this->bundle, $this->entity, $this->http, false) . 'Page.php'),
+        'oi'
+      );
     }
 }

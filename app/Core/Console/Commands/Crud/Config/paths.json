@@ -8,6 +8,7 @@
   },
   "paths": {
     "controller":     "Modules\\{bundle}\\Http\\Controllers",
+    "page":           "Modules\\{bundle}\\Http\\Pages",
     "model":          "",
     "request":        "",
     "view":           ""

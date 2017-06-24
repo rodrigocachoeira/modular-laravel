@@ -38,12 +38,14 @@ class Convert
     * @param String $bundle
     * @param String $entity
     * @param Array $preLoader
+    * @param boolean plurilize
     *
     * @return String
     */
-    public function namespaceToPath ($namespace, $bundle, $entity, $preLoader)
+    public function namespaceToPath ($namespace, $bundle, $entity, $preLoader, $plurilize)
     {
-      return str_replace('\\', '/', str_replace('{bundle}', $bundle, $namespace)).'/'. Inflector::pluralize($entity).'Controller.php';
+      return str_replace('\\', '/', str_replace('{bundle}', $bundle, $namespace)).'/'.
+        ($plurilize ? Inflector::pluralize($entity) : $entity);
     }
 
     /**
