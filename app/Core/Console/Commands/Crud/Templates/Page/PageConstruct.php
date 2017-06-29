@@ -69,6 +69,9 @@ class PageConstruct
   {
     $this->convert->change('namespace', $this->convert->changeKeys($loader->paths->http->page->namespace, ['bundle' => $bundle]), $this->content);
     $this->convert->change('page.name', $entity.'Page');
+    $this->convert->change('bundle.upperCase', strtoupper($bundle));
+    $this->convert->change('bundle', strtolower($bundle));
+    $this->convert->change('entity', strtolower($entity));
 
     $this->content = $this->convert->getCache()->tempContent;
   }

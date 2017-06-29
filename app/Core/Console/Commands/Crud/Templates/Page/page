@@ -12,7 +12,7 @@ trait {page.name}
      */
     public function indexPage()
     {
-      return view();
+      return view(self::{bundle.upperCase}.'.modules.{bundle}.{entity}.index');
     }
 
 

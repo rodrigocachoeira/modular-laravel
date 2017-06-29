@@ -12,7 +12,7 @@ trait UserPage
      */
     public function indexPage()
     {
-      return view();
+      return view(self::ADMIN.'.modules.admin.user.index');
     }
 
 
