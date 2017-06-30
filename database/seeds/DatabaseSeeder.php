@@ -2,6 +2,9 @@
 
 use Illuminate\Database\Seeder;
 
+use App\Modules\Test\Databases\Seeds\TestTableSeeder;
+use Illuminate\Database\Eloquent\Model;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -11,6 +14,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+      Model::unguard();
+        $this->testsModules();
+      Model::reguard();
+    }
+
+    /**
+    * Executa a seeders de um modulo
+    * em especifico
+    *
+    * @return void
+    */
+    private function testsModules ()
+    {
+      $this->call(TestTableSeeder::class);
     }
 }
