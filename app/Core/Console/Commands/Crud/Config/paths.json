@@ -17,5 +17,20 @@
     "model":          "",
     "request":        "",
     "view":           ""
+  },
+  "directories": {
+    "bundle": [
+      "Modules/{bundle}",
+      "Modules/{bundle}/Databases",
+      "Modules/{bundle}/Databases/Factories",
+      "Modules/{bundle}/Databases/Migrations",
+      "Modules/{bundle}/Databases/Seeds",
+      "Modules/{bundle}/Entities",
+      "Modules/{bundle}/Exceptions",
+      "Modules/{bundle}/Http",
+      "Modules/{bundle}/Http/Controllers",
+      "Modules/{bundle}/Http/Pages",
+      "Modules/{bundle}/Providers"
+    ]
   }
 }

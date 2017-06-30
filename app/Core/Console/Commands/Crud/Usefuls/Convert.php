@@ -49,6 +49,19 @@ class Convert
     }
 
     /**
+    * Realiza a troca de uma chave
+    *
+    * @param String $to
+    * @param String $from
+    *
+    * @return String
+    */
+    public function replaceKey ($to, $from, $content)
+    {
+      return str_replace('{'.$to.'}', $from, $content);
+    }
+
+    /**
     * Troca as chaves encontradas por seus
     * respectivos valores
     *

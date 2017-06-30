@@ -1,26 +1,25 @@
 <?php
 
-namespace {namespace};
+namespace App\Modules\Share\Http\Controllers;
 
-use {controller.main.namespace};
-use Illuminate\Http\Request;
+use App\Core\Http\Controllers\Controller;
 
-class {controller} extends {controller.main.name}
+class UsersController extends Controller
 {
 
   /**
-  * @param {controller.caps.repository} ${controller.repository}
+  * @param UserRepository $userRepository
   */
-  protected {controller.repository};
+  protected userRepository;
 
   /**
   * Método Construtor
   *
-  * @param {controller.caps.repository} ${controller.repository}
+  * @param UserRepository $userRepository
   */
-  public function __construct ({controller.caps.repository} ${controller.repository})
+  public function __construct (UserRepository $userRepository)
   {
-    $this->{controller.repository} = ${controller.repository};
+    $this->userRepository = $userRepository;
   }
 
   /**
@@ -36,26 +35,19 @@ class {controller} extends {controller.main.name}
   /**
   * Store Method
   *
-  * @param Request $request
-  *
   * @return Response
   */
-  public function store (Request $request)
+  public function store ()
   {
-    if ($this->{controller.repository}->save($request->all())) {
-      //Success
-    }
-    //Error
+    //TODO
   }
 
   /**
   * Update Method
   *
-  * @param Request $request
-  *
   * @return Response
   */
-  public function update ($id, $request)
+  public function update ()
   {
     //TODO
   }

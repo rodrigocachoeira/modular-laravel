@@ -102,7 +102,6 @@ class Make extends Command
     }
 
 
-
     /**
     * Realiza a criação do arquivo do crud
     * de acordo com os valores passados
@@ -150,10 +149,27 @@ class Make extends Command
     */
     private function makeController ($name)
     {
+      $this->controllerDirectories();
+
       File::put(
           app_path($this->convert->namespaceToPath($name, $this->bundle, $this->entity, $this->http, true) . 'Controller.php'),
           $this->template->getController()->mount($this->bundle, $this->entity, $this->loader)->getContent()
       );
+    }
+
+    /**
+    * Verifica se os diretorios padroes
+    * estao criados, caso contrário realiza a ligacao
+    *
+    * @return void
+    */
+    private function controllerDirectories ()
+    {
+      foreach ($this->loader->paths->directories->bundle as $directory) {
+        if (! is_dir(app_path($directory))) {
+          mkdir(app_path($this->convert->replaceKey('bundle', $this->bundle, $directory)), 0700);
+        }
+      }
     }
 
     /**
