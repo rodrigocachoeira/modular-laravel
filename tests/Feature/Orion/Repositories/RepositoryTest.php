@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Orion\Feature;
+namespace Tests\Orion\Feature\Repositories;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
