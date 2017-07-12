@@ -1,19 +1,19 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Orion\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use App\Core\Business\Repository\RepositoryInterface;
+use Orion\Core\Business\Repositories\RepositoryInterface;
 
 class RepositoryInterfaceTest extends TestCase
 {
 
   public function testInterfaceShouldBeExists ()
   {
-    $this->assertFileExists(app_path('Core/Business/Repository/RepositoryInterface.php'));
+    $this->assertFileExists(base_path('orion/Core/Business/Repositories/RepositoryInterface.php'));
   }
 
   public function testRepositoryHasGetMethod ()

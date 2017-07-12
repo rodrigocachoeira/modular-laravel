@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Business\Repository;
+namespace Orion\Core\Business\Repositories;
 
 /**
 * Interface de gerenciamento de metodos
@@ -40,10 +40,11 @@ interface RepositoryInterface
   * base no seu identificador
   *
   * @param number $id
+  * @param Array $columns
   *
   * @return Collection
   */
-  public function getById ($id);
+  public function getById ($id, $columns = ['*']);
 
   /**
   * Retorna os registros de acordo
